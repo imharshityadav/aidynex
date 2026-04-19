@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aidynex — More Patients for Your Dental Clinic or Practice</title>
+<meta name="description" content="Aidynex helps dental clinics and dentists in the UK, USA, Canada & Australia get more patients using targeted Meta ads, video content, and done-for-you social media management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D0D0D;
+    --navy-mid: #111111;
+    --navy-light: #1A1A1A;
+    --blue: #FF6B35;
+    --blue-light: #FF8C5A;
+    --teal: #C840E9;
+    --white: #FFFFFF;
+    --off-white: #F5F5F5;
+    --muted: #888888;
+    --border: rgba(255,255,255,0.06);
+    --font-head: 'Outfit', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: #FF6B35; border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid transparent;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(10, 22, 40, 0.92);
+    backdrop-filter: blur(20px);
+    border-bottom-color: var(--border);
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo img { display: block; height: 38px; width: auto; }
+  .logo-mark { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-wordmark {
+    font-family: var(--font-head);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .logo-wordmark em { font-style: normal; color: var(--blue); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: #FF6B35 !important;
+    color: #0D0D0D !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85 !important; }
+
+  /* hamburger */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+  .mobile-menu { display: none; position: fixed; inset: 0; background: var(--navy); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: var(--font-head); font-size: 2rem; font-weight: 700; color: var(--white); text-decoration: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 5% 80px;
+  }
+
+  /* animated grid lines */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,107,53,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,53,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 20s linear infinite;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+  }
+  @keyframes gridDrift { from { transform: translate(0,0); } to { transform: translate(60px, 60px); } }
+
+  /* glow orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .orb-1 { width: 600px; height: 600px; background: rgba(255,107,53,0.10); top: -100px; right: -100px; animation: float1 8s ease-in-out infinite; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(200,64,233,0.08); bottom: 0; left: -100px; animation: float2 10s ease-in-out infinite; }
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-20px)} }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,53,0.12);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-radius: 100px;
+    padding: 6px 16px 6px 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #FF8C5A;
+    margin-bottom: 2rem;
+    animation: fadeDown 0.6s ease both;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: #C840E9;
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 .accent { color: var(--blue); }
+  .hero h1 .accent2 { color: var(--teal); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #FF8C5A; transform: translateY(-1px); }
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+
+  /* stats strip */
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.7s 0.4s ease both;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+  .stat-num span { color: var(--blue); }
+  .stat-lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* ── SECTIONS SHARED ── */
+  section { position: relative; padding: 6rem 5%; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #FF6B35;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* reveal animation */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── LOGOS STRIP ── */
+  .logos-strip {
+    padding: 2.5rem 5%;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.01);
+    overflow: hidden;
+  }
+  .logos-label { text-align: center; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .logos-track { display: flex; gap: 3rem; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .logo-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .logo-pill-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── SERVICES ── */
+  #services { background: rgba(255,255,255,0.01); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    margin-top: 3rem;
+    background: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--navy-mid);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--navy-light); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FF6B35, #C840E9);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .svc-icon {
+    width: 48px; height: 48px;
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .svc-icon svg { color: #FF6B35; }
+  .service-card h3 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+  .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+  .svc-tag {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #C840E9;
+    background: rgba(200,64,233,0.1);
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 4rem; }
+  .step {
+    position: relative;
+    padding: 2rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .step:hover { border-color: rgba(255,107,53,0.3); transform: translateY(-4px); }
+  .step-num {
+    font-family: var(--font-head);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: rgba(74,158,245,0.12);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+  .step h3 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--navy-mid); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .pricing-card {
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-card.featured {
+    border-color: rgba(255,107,53,0.45);
+    background: rgba(255,107,53,0.05);
+  }
+  .pricing-card.featured::after {
+    content: 'Most popular';
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--blue);
+    color: var(--navy);
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .pricing-name { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .pricing-price {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.25rem;
+  }
+  .pricing-price sup { font-size: 1.5rem; vertical-align: super; }
+  .pricing-period { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+  .pricing-inr { font-size: 0.78rem; color: #C840E9; margin-top: -1.5rem; margin-bottom: 1.5rem; }
+  .pricing-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+  .pricing-feat {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 0.75rem;
+    font-weight: 300;
+  }
+  .pricing-feat .check { color: #C840E9; margin-top: 2px; flex-shrink: 0; }
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    color: var(--white);
+  }
+  .pricing-cta:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+  .featured .pricing-cta { background: #FF6B35; color: #0D0D0D; border-color: #FF6B35; }
+  .featured .pricing-cta:hover { background: var(--blue-light); border-color: var(--blue-light); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .testi-card:hover { border-color: rgba(255,107,53,0.2); transform: translateY(-3px); }
+  .testi-quote {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    color: rgba(74,158,245,0.2);
+    line-height: 0.5;
+    margin-bottom: 1rem;
+  }
+  .testi-text { font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.7; font-style: italic; font-weight: 300; margin-bottom: 1.5rem; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B35, #C840E9);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 0.85rem; font-weight: 500; }
+  .testi-role { font-size: 0.75rem; color: var(--muted); }
+  .testi-stars { color: #FF6B35; font-size: 0.75rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+
+  /* ── RESULTS ── */
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 3rem; }
+  .result-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: border-color 0.3s;
+  }
+  .result-card:hover { border-color: rgba(255,107,53,0.25); }
+  .result-num { font-family: var(--font-head); font-size: 2.8rem; font-weight: 800; letter-spacing: -0.04em; color: #FF6B35; }
+  .result-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; font-weight: 400; }
+
+  /* ── CONTACT / CTA ── */
+  #contact {
+    background: linear-gradient(135deg, rgba(255,107,53,0.06) 0%, rgba(200,64,233,0.04) 100%);
+    border-top: 1px solid var(--border);
+  }
+  .contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .contact-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+    margin-top: 3rem;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; text-align: left; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.78rem; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: rgba(255,107,53,0.5); background: rgba(255,107,53,0.05); }
+  .form-group select option { background: var(--navy-mid); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit { width: 100%; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080808;
+    border-top: 1px solid var(--border);
+    padding: 3rem 5% 2rem;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand p { font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.7; font-weight: 300; max-width: 280px; }
+  .footer-col h4 { font-family: var(--font-head); font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.03em; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { font-size: 0.78rem; color: var(--muted); }
+  .footer-email { font-size: 0.82rem; color: #FF6B35; text-decoration: none; }
+  .footer-email:hover { color: #FF8C5A; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero h1 { font-size: 2.6rem; }
+    .hero-stats { gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-brand p { max-width: 100%; }
+    section { padding: 4rem 5%; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 2.1rem; }
+    .pricing-grid, .testimonials-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;">
+      <svg width="48" height="48" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nl-a" x1="4" y1="52" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FF6B35"/>
+            <stop offset="45%" stop-color="#C840E9"/>
+            <stop offset="100%" stop-color="#4A9EF5"/>
+          </linearGradient>
+          <linearGradient id="nl-b" x1="0" y1="0" x2="52" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1DB88A"/>
+            <stop offset="100%" stop-color="#4A9EF5"/>
+          </linearGradient>
+        </defs>
+        <path d="M26 6L6 46H26V6Z" fill="url(#nl-a)" opacity="0.92"/>
+        <path d="M26 6L46 46H26V6Z" fill="url(#nl-a)" opacity="0.5"/>
+        <path d="M13 37L21 25L28 31L38 17" stroke="url(#nl-b)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="38" cy="17" r="3" fill="#1DB88A"/>
+        <line x1="15" y1="39" x2="37" y2="39" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:0.08em;background:linear-gradient(90deg,#fff 0%,#A78BFF 50%,#4A9EF5 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">AIDYNEX</span>
+    </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#contact" class="nav-cta">Get free audit</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#how" onclick="toggleMenu()">How it works</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#results" onclick="toggleMenu()">Results</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:#FF6B35">Get free audit</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Meta ads specialists for dental clinics &amp; dentists
+    </div>
+    <h1>
+      More patients for your<br>
+      <span class="accent">dental clinic</span> or <span class="accent2">practice</span>
+    </h1>
+    <p class="hero-sub">
+      Aidynex helps dental clinics and dentists in the UK, USA, Canada &amp; Australia attract more patients using targeted Facebook &amp; Instagram ads — guaranteed results or you don't pay.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Get your free audit
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#results" class="btn-ghost">See our results</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-lbl">Dental practices served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3<span>x</span></div>
+        <div class="stat-lbl">Avg. ROI on ad spend</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">UK <span>&</span> AUS</div>
+        <div class="stat-lbl">Primary markets</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">14<span>d</span></div>
+        <div class="stat-lbl">To first results</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS STRIP -->
+<div class="logos-strip">
+  <div class="logos-label">Trusted by dental practices across</div>
+  <div class="logos-track">
+    <div class="logo-pill"><span class="logo-pill-dot" style="background:#012169"></span> United Kingdom</div>
+    <div class="logo-pill"><span class="logo-pill-dot" style="background:#3C3B6E"></span> United States</div>
+    <div class="logo-pill"><span class="logo-pill-dot" style="background:#FF0000"></span> Canada</div>
+    <div class="logo-pill"><span class="logo-pill-dot" style="background:#00843D"></span> Australia</div>
+    <div class="logo-pill"><span class="logo-pill-dot" style="background:#007A3D"></span> UAE</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">What we do</div>
+      <h2 class="section-title">Everything your business<br>needs to grow online</h2>
+      <p class="section-sub">We handle your dental practice marketing end-to-end so you can focus on treating patients.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="2" y="3" width="18" height="13" rx="2"/><path d="M7 19h8M11 16v3"/>
+          </svg>
+        </div>
+        <h3>Meta ads management</h3>
+        <p>Facebook &amp; Instagram campaigns that bring in real dental patients, not just clicks. We handle strategy, creative, targeting, and optimisation.</p>
+        <span class="svc-tag">Core service</span>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+          </svg>
+        </div>
+        <h3>Website &amp; landing pages</h3>
+        <p>Fast, beautiful landing pages that convert visitors into appointment bookings and new patient enquiries. Built to load instantly on all devices.</p>
+        <span class="svc-tag">Included</span>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </div>
+        <h3>Video editing &amp; reels</h3>
+        <p>Short-form videos and reels showcasing your dental practice, team, and treatments — 8 videos produced per month.</p>
+        <span class="svc-tag">8 videos/mo</span>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="11" cy="11" r="9"/><path d="M11 6v5l3 3"/>
+          </svg>
+        </div>
+        <h3>Social media management</h3>
+        <p>Daily posts, stories, and content calendar management — patient testimonials, treatment spotlights, and dental tips that build trust and drive bookings.</p>
+        <span class="svc-tag">Daily posts</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Process</div>
+      <h2 class="section-title">From sign-up to results<br>in 14 days</h2>
+      <p class="section-sub">A clear, simple process designed so your dental practice sees real new patient growth fast — no months of waiting.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">01</div>
+        <h3>Free audit call</h3>
+        <p>We analyse your current Facebook &amp; Instagram presence, your local dental competitors, and your market — then share exactly what we'd do for your practice.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">02</div>
+        <h3>Strategy &amp; setup</h3>
+        <p>We build your patient acquisition strategy, design dental-focused creatives, set up your ad account, and launch within 5 business days.</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">03</div>
+        <h3>Launch &amp; optimise</h3>
+        <p>Your campaigns go live targeting people searching for dental services nearby. We monitor daily and send weekly performance updates.</p>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">04</div>
+        <h3>Scale &amp; grow</h3>
+        <p>Once we find what works, we scale your ad budget and patient flow. Most dental clients see consistent new patient growth from month 2 onwards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width: 600px; margin: 0 auto;">
+      <div class="section-tag">Results</div>
+      <h2 class="section-title">Numbers that matter</h2>
+      <p class="section-sub" style="margin: 0 auto;">Real results from real dental clinics and practices we've worked with.</p>
+    </div>
+    <div class="results-grid reveal" style="margin-top:3rem;">
+      <div class="result-card">
+        <div class="result-num">40+</div>
+        <div class="result-label">New patient enquiries per week for a London dental clinic (Month 1)</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">3.5x</div>
+        <div class="result-label">Return on ad spend average across all active clients</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">35</div>
+        <div class="result-label">New cosmetic dental consults booked per week for a Sydney practice</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">14d</div>
+        <div class="result-label">Average days to first new patient booking after campaign launch</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials-grid" style="margin-top:3rem;">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Aidynex brought us 40+ new patient enquiries in the first month alone. We were sceptical about social media ads but these guys delivered beyond what we expected.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JT</div>
+          <div>
+            <div class="testi-name">Dr. James Thompson</div>
+            <div class="testi-role">Dental clinic owner, London UK</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Our clinic went from 10 to 35 new patient enquiries per week. The video content they produce is incredible — patients actually comment on it when they come in.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SM</div>
+          <div>
+            <div class="testi-name">Dr. Sarah Mitchell</div>
+            <div class="testi-role">Dental clinic owner, Sydney AU</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Best investment I've made for my dental practice. The weekly reports are clear, the team is always available, and they genuinely care about your results.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RK</div>
+          <div>
+            <div class="testi-name">Dr. Ravi Khanna</div>
+            <div class="testi-role">Dentist &amp; practice owner, Toronto CA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+      <div class="section-tag">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-sub" style="margin:0 auto;">No hidden fees. No long-term lock-in after 3 months. Cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal reveal-delay-1">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price"><sup>$</sup>500</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-inr">≈ ₹41,500 / month</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-feat"><span class="check">✓</span> Meta ads setup (FB + IG)</div>
+        <div class="pricing-feat"><span class="check">✓</span> 2 ad creatives per month</div>
+        <div class="pricing-feat"><span class="check">✓</span> 1 campaign (offers/footfall)</div>
+        <div class="pricing-feat"><span class="check">✓</span> Monthly performance report</div>
+        <div class="pricing-feat"><span class="check">✓</span> Email support</div>
+        <a href="#contact" class="pricing-cta">Get started</a>
+      </div>
+      <div class="pricing-card featured reveal reveal-delay-2">
+        <div class="pricing-name">Growth</div>
+        <div class="pricing-price"><sup>$</sup>1,200</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-inr">≈ ₹99,600 / month</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-feat"><span class="check">✓</span> Everything in Starter</div>
+        <div class="pricing-feat"><span class="check">✓</span> Landing page / website</div>
+        <div class="pricing-feat"><span class="check">✓</span> 4 short-form videos per month</div>
+        <div class="pricing-feat"><span class="check">✓</span> 2 ad campaigns running</div>
+        <div class="pricing-feat"><span class="check">✓</span> Bi-weekly strategy calls</div>
+        <a href="#contact" class="pricing-cta">Get started</a>
+      </div>
+      <div class="pricing-card reveal reveal-delay-3">
+        <div class="pricing-name">Full SMMA</div>
+        <div class="pricing-price"><sup>$</sup>2,500</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-inr">≈ ₹2,07,500 / month</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-feat"><span class="check">✓</span> Everything in Growth</div>
+        <div class="pricing-feat"><span class="check">✓</span> Full social media management</div>
+        <div class="pricing-feat"><span class="check">✓</span> 8 videos &amp; reels per month</div>
+        <div class="pricing-feat"><span class="check">✓</span> Google My Business optimisation</div>
+        <div class="pricing-feat"><span class="check">✓</span> Weekly strategy calls</div>
+        <div class="pricing-feat"><span class="check">✓</span> Ad spend mgmt up to $3k/mo</div>
+        <a href="#contact" class="pricing-cta">Get started</a>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:1.5rem; font-size:0.8rem; color:var(--muted);">Ad spend is separate and paid directly to Meta. All prices in USD.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="section-tag" style="display:block; text-align:center;">Get started</div>
+        <h2 class="section-title" style="text-align:center;">Get your free audit</h2>
+        <p class="section-sub" style="margin:0 auto; text-align:center;">We'll analyse your dental practice's Facebook &amp; Instagram, your local competitors, and show you exactly how to get more patients — completely free, no strings attached.</p>
+      </div>
+      <div class="contact-card reveal">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your name</label>
+              <input type="text" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label>Business name</label>
+              <input type="text" placeholder="The Blue Bistro" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email address</label>
+              <input type="email" placeholder="john@yourbusiness.com" required>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp / Phone</label>
+              <input type="tel" placeholder="+44 7700 000000">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Business type</label>
+              <select>
+                <option value="">Select...</option>
+                <option>General dental clinic</option>
+                <option>Cosmetic / Aesthetic dentistry</option>
+                <option>Orthodontist / Braces</option>
+                <option>Implant specialist</option>
+                <option>Pediatric dentist</option>
+                <option>Multi-specialty dental practice</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Country</label>
+              <select>
+                <option value="">Select...</option>
+                <option>United Kingdom</option>
+                <option>United States</option>
+                <option>Canada</option>
+                <option>Australia</option>
+                <option>UAE</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>What's your biggest marketing challenge? (optional)</label>
+            <textarea placeholder="e.g. We struggle to get new patients booked for cosmetic treatments..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">
+            Request my free audit
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1.25rem;">
+          <a href="mailto:grow@aidynex.com" style="display:inline-flex; align-items:center; gap:7px; font-size:0.82rem; color:var(--muted); text-decoration:none; border:1px solid var(--border); border-radius:8px; padding:8px 16px; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(74,158,245,0.4)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="1" y="3" width="13" height="9" rx="1.5"/><path d="M1 4l6.5 5L14 4"/></svg>
+            grow@aidynex.com
+          </a>
+          <a href="https://instagram.com/aidynex" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:7px; font-size:0.82rem; color:var(--muted); text-decoration:none; border:1px solid var(--border); border-radius:8px; padding:8px 16px; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(74,158,245,0.4)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="13" height="13" rx="3.5"/><circle cx="7.5" cy="7.5" r="3"/><circle cx="11.2" cy="3.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+            @aidynex
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;">
+        <svg width="38" height="38" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fl-a" x1="4" y1="52" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FF6B35"/>
+              <stop offset="45%" stop-color="#C840E9"/>
+              <stop offset="100%" stop-color="#4A9EF5"/>
+            </linearGradient>
+            <linearGradient id="fl-b" x1="0" y1="0" x2="52" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#1DB88A"/>
+              <stop offset="100%" stop-color="#4A9EF5"/>
+            </linearGradient>
+          </defs>
+          <path d="M26 6L6 46H26V6Z" fill="url(#fl-a)" opacity="0.92"/>
+          <path d="M26 6L46 46H26V6Z" fill="url(#fl-a)" opacity="0.5"/>
+          <path d="M13 37L21 25L28 31L38 17" stroke="url(#fl-b)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="38" cy="17" r="3" fill="#1DB88A"/>
+          <line x1="15" y1="39" x2="37" y2="39" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.08em;background:linear-gradient(90deg,#fff 0%,#A78BFF 50%,#4A9EF5 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">AIDYNEX</span>
+      </a>
+        <p>Meta ads and full social media marketing exclusively for dental clinics and dentists in the UK, USA, Canada, and Australia. Real results, transparent pricing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Meta ads management</a></li>
+          <li><a href="#services">Website design</a></li>
+          <li><a href="#services">Video editing</a></li>
+          <li><a href="#services">Full SMMA retainer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#contact">Free audit</a></li>
+          <li><a href="mailto:grow@aidynex.com">grow@aidynex.com</a></li>
+          <li><a href="https://instagram.com/aidynex" target="_blank" rel="noopener">Instagram @aidynex</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aidynex. All rights reserved.</p>
+      <div style="display:flex; gap:1.25rem; align-items:center;">
+        <a href="mailto:grow@aidynex.com" class="footer-email">grow@aidynex.com</a>
+        <a href="https://instagram.com/aidynex" target="_blank" rel="noopener" class="footer-email" style="display:flex; align-items:center; gap:5px;">
+          <svg width="13" height="13" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="13" height="13" rx="3.5"/><circle cx="7.5" cy="7.5" r="3"/><circle cx="11.2" cy="3.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+          @aidynex
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Sent! We\'ll be in touch within 24h';
+    btn.style.background = '#C840E9';
+    btn.disabled = true;
+  }
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
